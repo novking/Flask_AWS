@@ -1,0 +1,33 @@
+<html>
+   <head>
+       <title>Plagiarism Defender</title>
+       <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet" media="screen">
+
+   </head>
+   <body>
+     <body style = "background-color: lightgrey; padding-top: 70px; ">
+     <nav class="navbar navbar-inverse navbar-fixed-top">
+       <div class="container">
+         <div class="navbar-header">
+           <a class="navbar-brand" href="#">Plagiarism Defender</a>
+         </div>
+       </div>
+     </nav>
+
+       <div id="container">
+           <div class="title">
+               <h1>Plagiarism Defender Results</h1>
+           </div>
+           <div id="content">
+               In our best opinion, the text you entered is <strong>{{is_it_plagiarized}}</strong> plagiarized!
+           </div>
+           <BR><BR>
+           <div id="content">
+               Text Entered: <strong>{{text_to_filter}}</strong>
+           </div>
+       </div>
+       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+     
+   </body>
+</html>
