@@ -101,3 +101,30 @@ def register_page():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
+
+
+# below are hashing exmaples for future reference
+# import hashlib
+# password = 'pa$$w0rd'
+# h = hashlib.md5(password.encode())
+# print(h.hexdigest())
+#
+#
+# user_entered_password = 'pa$$w0rd'
+# salt = "5gz"
+# db_password = user_entered_password+salt
+# h = hashlib.md5(db_password.encode())
+# print(h.hexdigest())
+# ---------------------------
+#
+# from passlib.hash import sha256_crypt
+#
+# password = sha256_crypt.encrypt("password")
+# password2 = sha256_crypt.encrypt("password")
+#
+# print(password)
+# print(password2)
+#
+# print(sha256_crypt.verify("password", password))
+#
