@@ -21,15 +21,22 @@ def index():
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             return redirect(url_for('index'))
     return """
-    <!doctype html>
-    <title>Upload new File</title>
-    <h1>Upload new File</h1>
-    <form action="" method=post enctype=multipart/form-data>
-      <p><input type=file name=file>
-         <input type=submit value=Upload>
-    </form>
-    <p>%s</p>
-    """ % "<br>".join(os.listdir(app.config['UPLOAD_FOLDER'],))
+    # <!doctype html>
+    # <title>Upload new File</title>
+    # <h1>Upload new File</h1>
+    # <form action="" method=post enctype=multipart/form-data>
+    #   <p><input type=file name=file>
+    #      <input type=submit value=Upload>
+    # </form>
+    # <p>%s</p>
+    # """ % "<br>".join(os.listdir(app.config['UPLOAD_FOLDER'],))
+
+
+def build_route_pattern(route):
+    route_regex = re.sub(r'(<\w+>)', r'(?P\1.+)', route)
+    return re.compile("^{}$".format(route_regex))
+
+print build_route_pattern('/hello/<username>')
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5001, debug=True)
