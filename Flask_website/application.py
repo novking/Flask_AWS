@@ -1,4 +1,5 @@
 from flask import Flask
+from mongokit import Connection, Document, ValidationError
 
 # print a nice greeting.
 def say_hello(username = "World"):
@@ -26,9 +27,39 @@ application.add_url_rule('/', 'index', (lambda: header_text +
 application.add_url_rule('/<username>', 'hello', (lambda username:
     header_text + say_hello(username) + home_link + footer_text))
 
-# run the app.
+MONGODB_HOST = 'localhost'
+MONGODB_PORT = 27017
+
+app = Flask(__name__)
+app.config.from_object(__name__)
+
+connection = Connection(app.config['MONGODB_HOST'],
+                        app.config['MONGODB_PORT'])
+
+def max_length(length):
+    def validate(value):
+        if len(value) <= length:
+            return True
+        raise ValidationError('%s must be at most {} characters long'.format(length))
+    return validate
+
+class User(Document):
+    structure = {
+        'name': unicode,
+        'email': unicode,
+    }
+    validators = {
+        'name': max_length(50),
+        'email': max_length(120)
+    }
+    use_dot_notation = True
+    def __repr__(self):
+        return '<User %r>' % (self.name)
+
+
 if __name__ == "__main__":
     # Setting debug to True enables debug output. This line should be
     # removed before deploying a production app.
     application.debug = True
     application.run()
+    connection.register([User])
